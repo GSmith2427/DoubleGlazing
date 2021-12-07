@@ -13,5 +13,13 @@ namespace DoubleGlazing
         {
 
         }
+
+        protected void grdSelectCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DoublePaneEntities db = new DoublePaneEntities();
+
+
+        }
+
     }
 }

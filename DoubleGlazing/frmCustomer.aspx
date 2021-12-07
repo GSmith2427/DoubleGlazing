@@ -32,10 +32,10 @@
             Email
             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             <br />
-            <asp:GridView ID="grdSelectCustomer" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display.">
+            <asp:GridView ID="grdCustomer" runat="server" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." OnSelectedIndexChanged="grdCustomer_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
-                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" ReadOnly="True" SortExpression="CustomerID" InsertVisible="False" />
+                    <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" ReadOnly="True" SortExpression="CustomerID" />
                     <asp:BoundField DataField="First_Name_" HeaderText="First_Name_" SortExpression="First_Name_" />
                     <asp:BoundField DataField="Last_Name" HeaderText="Last_Name" SortExpression="Last_Name" />
                     <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
@@ -43,15 +43,6 @@
                     <asp:BoundField DataField="DOB" HeaderText="DOB" SortExpression="DOB" />
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                 </Columns>
-                <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
-                <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
-                <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
-                <RowStyle BackColor="White" ForeColor="#003399" />
-                <SelectedRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
-                <SortedAscendingCellStyle BackColor="#EDF6F6" />
-                <SortedAscendingHeaderStyle BackColor="#0D4AC4" />
-                <SortedDescendingCellStyle BackColor="#D6DFDF" />
-                <SortedDescendingHeaderStyle BackColor="#002876" />
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Customer] WHERE [CustomerID] = @CustomerID" InsertCommand="INSERT INTO [Customer] ([First Name ], [Last Name], [Address], [Telephone Number], [DOB], [Email]) VALUES (@First_Name_, @Last_Name, @Address, @Telephone_Number, @DOB, @Email)" SelectCommand="SELECT [CustomerID], [First Name ] AS First_Name_, [Last Name] AS Last_Name, [Address], [Telephone Number] AS Telephone_Number, [DOB], [Email] FROM [Customer]" UpdateCommand="UPDATE [Customer] SET [First Name ] = @First_Name_, [Last Name] = @Last_Name, [Address] = @Address, [Telephone Number] = @Telephone_Number, [DOB] = @DOB, [Email] = @Email WHERE [CustomerID] = @CustomerID">
                 <DeleteParameters>

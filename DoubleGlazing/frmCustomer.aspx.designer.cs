@@ -78,13 +78,13 @@ namespace DoubleGlazing
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// grdSelectCustomer control.
+        /// grdCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdSelectCustomer;
+        protected global::System.Web.UI.WebControls.GridView grdCustomer;
 
         /// <summary>
         /// SqlDataSource1 control.
