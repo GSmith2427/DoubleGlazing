@@ -21,5 +21,32 @@ namespace DoubleGlazing
 
         }
 
+        
+     
+        
+        protected void btnNewEntry_Click(object sender, EventArgs e)
+        {
+            DoublePaneEntities db = new DoublePaneEntities();
+
+            var customer = new Customer();
+
+            customer.First_Name_ = TxtFirstName.Text;
+
+            customer.Last_Name = TxtLastName.Text;
+
+            DateTime.Parse(txtDOB.Text);
+
+            customer.Address = txtAddress.Text;
+
+            customer.Telephone_Number = txtTelephoneNumber.Text;
+
+            customer.Email = txtEmail.Text;
+
+            db.Customers.Add(customer);
+
+            db.SaveChanges();
+
+            grdCustomer.DataBind();
+        }
     }
-}
+    }
