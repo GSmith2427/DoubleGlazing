@@ -51,6 +51,15 @@ namespace DoubleGlazing
         protected global::System.Web.UI.WebControls.TextBox txtDOB;
 
         /// <summary>
+        /// calCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calCustomer;
+
+        /// <summary>
         /// txtAddress control.
         /// </summary>
         /// <remarks>

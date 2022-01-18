@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DoublePaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DoublePaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -14,7 +14,7 @@
           <Property Name="Last Name" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Telephone Number" Type="varchar" MaxLength="50" />
-          <Property Name="DOB" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="smalldatetime" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manufacturer">
@@ -143,24 +143,10 @@
             <End Role="Visit" EntitySet="Visit" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoublePaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="CustomerID" />
-          </Key>
-          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="First_Name_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telephone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Visits" Relationship="Self.FK_Visit_ToCustomer" FromRole="Customer" ToRole="Visit" />
-        </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
             <PropertyRef Name="ManufacturerID" />
@@ -218,21 +204,9 @@
           <Property Name="VisitID" Type="Int32" Nullable="false" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Visit_ToCustomer" FromRole="Visit" ToRole="Customer" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Visit_ToStaff" FromRole="Visit" ToRole="Staff" />
+          <NavigationProperty Name="Customer" Relationship="DoublePaneModel.FK_Visit_ToCustomer" FromRole="Visit" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_Visit_ToCustomer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="Visit">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_ToManufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -270,17 +244,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DoublePaneEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Sales_Leads" EntityType="Self.Sales_Lead" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Visits" EntityType="Self.Visit" />
-          <AssociationSet Name="FK_Visit_ToCustomer" Association="Self.FK_Visit_ToCustomer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Visit" EntitySet="Visits" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_ToManufacturer" Association="Self.FK_Product_ToManufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturers" />
             <End Role="Product" EntitySet="Products" />
@@ -293,26 +262,43 @@
             <End Role="Staff" EntitySet="Staffs" />
             <End Role="Visit" EntitySet="Visits" />
           </AssociationSet>
+          <EntitySet Name="Customers" EntityType="DoublePaneModel.Customer" />
+          <AssociationSet Name="FK_Visit_ToCustomer" Association="DoublePaneModel.FK_Visit_ToCustomer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Visit" EntitySet="Visits" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Visits" Relationship="DoublePaneModel.FK_Visit_ToCustomer" FromRole="Customer" ToRole="Visit" />
+        </EntityType>
+        <Association Name="FK_Visit_ToCustomer">
+          <End Type="DoublePaneModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DoublePaneModel.Visit" Role="Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DoublePaneModelStoreContainer" CdmEntityContainer="DoublePaneEntities">
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="DoublePaneModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="First_Name_" ColumnName="First Name " />
-                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Telephone_Number" ColumnName="Telephone Number" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Manufacturers">
             <EntityTypeMapping TypeName="DoublePaneModel.Manufacturer">
               <MappingFragment StoreEntitySet="Manufacturer">
@@ -369,6 +355,19 @@
                 <ScalarProperty Name="VisitID" ColumnName="VisitID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DoublePaneModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Telephone_Number" ColumnName="Telephone Number" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="First_Name_" ColumnName="First Name " />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\s0296975\source\repos\DoubleGlazing\DoubleGlazing\DoubleGlazing.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\s0296975\Source\Repos\DoubleGlazing\DoubleGlazing\DoubleGlazing.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
