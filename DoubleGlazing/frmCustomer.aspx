@@ -17,7 +17,16 @@
             <br />
             <br />
             Date Of Birth&nbsp; <asp:TextBox ID="txtDOB" runat="server"></asp:TextBox>
-            <asp:Calendar ID="calCustomer" runat="server"></asp:Calendar>
+            <asp:Calendar ID="calCustomer" runat="server" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px" Width="200px">
+                <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                <NextPrevStyle VerticalAlign="Bottom" />
+                <OtherMonthDayStyle ForeColor="#808080" />
+                <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                <SelectorStyle BackColor="#CCCCCC" />
+                <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                <WeekendDayStyle BackColor="#FFFFCC" />
+            </asp:Calendar>
             <br />
             <br />
             <br />
@@ -38,8 +47,7 @@
             <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:GridView ID="grdCustomer" runat="server" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." OnSelectedIndexChanged="grdCustomer_SelectedIndexChanged" CellPadding="3" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px">
-                <AlternatingRowStyle BackColor="#DCDCDC" />
+            <asp:GridView ID="grdCustomer" runat="server" AutoGenerateColumns="False" DataKeyNames="CustomerID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." OnSelectedIndexChanged="grdCustomer_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" ReadOnly="True" SortExpression="CustomerID" InsertVisible="False" />
@@ -51,17 +59,9 @@
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                 </Columns>
                 <EditRowStyle BorderStyle="None" />
-                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#000065" />
+                <SelectedRowStyle BackColor="Red" />
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Customer] WHERE [CustomerID] = @CustomerID" InsertCommand="INSERT INTO [Customer] ([First Name ], [Last Name], [Address], [Telephone Number], [DOB], [Email]) VALUES (@First_Name_, @Last_Name, @Address, @Telephone_Number, @DOB, @Email)" SelectCommand="SELECT [CustomerID], [First Name ] AS First_Name_, [Last Name] AS Last_Name, [Address], [Telephone Number] AS Telephone_Number, [DOB], [Email] FROM [Customer]" UpdateCommand="UPDATE [Customer] SET [First Name ] = @First_Name_, [Last Name] = @Last_Name, [Address] = @Address, [Telephone Number] = @Telephone_Number, [DOB] = @DOB, [Email] = @Email WHERE [CustomerID] = @CustomerID">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Customer] WHERE [CustomerID] = @CustomerID" InsertCommand="INSERT INTO [Customer] ([First Name ], [Last Name], [Address], [Telephone Number], [DOB], [Email]) VALUES (@First_Name_, @Last_Name, @Address, @Telephone_Number, @DOB, @Email)" SelectCommand="SELECT [CustomerID], [First Name ] AS First_Name_, [Last Name] AS Last_Name, [Address], [Telephone Number] AS Telephone_Number, [DOB], [Email] FROM [Customer]" UpdateCommand="UPDATE Customer SET [First Name ] = @First_Name_, [Last Name] = @Last_Name, Address = @Address, [Telephone Number] = @Telephone_Number, DOB = @DOB, Email = @Email WHERE (CustomerID = @CustomerID)">
                 <DeleteParameters>
                     <asp:Parameter Name="CustomerID" Type="Int32" />
                 </DeleteParameters>
