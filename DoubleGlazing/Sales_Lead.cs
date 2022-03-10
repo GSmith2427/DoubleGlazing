@@ -15,5 +15,10 @@ namespace DoubleGlazing
     public partial class Sales_Lead
     {
         public int Sales_LeadID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
+        public Nullable<int> ManufacturerID { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

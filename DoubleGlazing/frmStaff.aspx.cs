@@ -17,19 +17,17 @@ namespace DoubleGlazing
             {
                DoublePaneEntities db = new DoublePaneEntities();
 
-                var staff = db.Staff.Find(grdStaff.SelectedValue);
+                var staff = db.Staffs.Find(grdStaff.SelectedValue);
 
                 staff.First_Name = TxtFirstName.Text;
 
-                customer.Last_Name = TxtLastName.Text;
+                staff.Last_Name_ = TxtLastName.Text;
 
-                customer.DOB = calStaff.SelectedDate;
+                staff.DOB = calStaff.SelectedDate;
 
-                customer.Address = txtAddress.Text;
+                staff.Email = txtEmail.Text;
 
-                customer.Email = txtEmail.Text;
-
-                customer.Telephone_Number = txtTelephoneNumber.Text;
+                staff.Telephone_Number = txtTelephoneNumber.Text;
 
                 db.SaveChanges();
 
@@ -45,37 +43,35 @@ namespace DoubleGlazing
 
                 var staff = new Staff();
 
-                Staff.First_Name_ = TxtFirstName.Text;
+                staff.First_Name = TxtFirstName.Text;
 
-                customer.Last_Name = TxtLastName.Text;
+                staff.Last_Name_ = TxtLastName.Text;
 
-                //customer.DOB = DateTime.Parse(txtDOB.Text); 
-                customer.DOB = calCustomer.SelectedDate;
+                //staff.DOB = DateTime.Parse(txtDOB.Text); 
+                staff.DOB = calStaff.SelectedDate;
 
-                customer.Address = txtAddress.Text;
+                staff.Telephone_Number = txtTelephoneNumber.Text;
 
-                customer.Telephone_Number = txtTelephoneNumber.Text;
+                staff.Email = txtEmail.Text;
 
-                customer.Email = txtEmail.Text;
-
-                db.Customers.Add(customer);
+                db.Staffs.Add(staff);
 
                 db.SaveChanges();
 
-                grdCustomer.DataBind();
+                grdStaff.DataBind();
             }
 
             protected void btnDelete_Click(object sender, EventArgs e)
             {
                 DoublePaneEntities db = new DoublePaneEntities();
 
-                var customer = db.Customers.Find(grdCustomer.SelectedValue);
+                var staff = db.Staffs.Find(grdStaff.SelectedValue);
 
-                db.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
+                db.Entry(staff).State = System.Data.Entity.EntityState.Deleted;
 
                 db.SaveChanges();
 
-                grdCustomer.DataBind();
+                grdStaff.DataBind();
 
 
             }
@@ -84,50 +80,46 @@ namespace DoubleGlazing
             {
                 DoublePaneEntities db = new DoublePaneEntities();
 
-                var customer = db.Customers.Find(grdCustomer.SelectedValue);
+                var staff = db. Staffs.Find(grdStaff.SelectedValue);
 
-                customer.First_Name_ = TxtFirstName.Text;
+                staff.First_Name = TxtFirstName.Text;
 
-                customer.Last_Name = TxtLastName.Text;
+                staff.Last_Name_ = TxtLastName.Text;
 
-                customer.DOB = calCustomer.SelectedDate;
+                staff.DOB = calStaff.SelectedDate;
 
-                customer.Address = txtAddress.Text;
+                staff.Email = txtEmail.Text;
 
-                customer.Email = txtEmail.Text;
-
-                customer.Telephone_Number = txtTelephoneNumber.Text;
+                staff.Telephone_Number = txtTelephoneNumber.Text;
 
                 db.SaveChanges();
 
-                grdCustomer.DataBind();
+                grdStaff.DataBind();
 
                 btnUpdate.Enabled = true;
             }
 
-            protected void grdStaff_SelectedIndexChanged(object sender, EventArgs e)
-            {
-                DoublePaneEntities db = new DoublePaneEntities();
-
-                var staff = db.Staff.Find(grdStaff.SelectedValue);
-
-                TxtFirstName.Text = customer.First_Name_;
-
-                TxtLastName.Text = customer.Last_Name;
-
-                calCustomer.SelectedDate = (DateTime)customer.DOB;
-
-                txtAddress.Text = customer.Address;
-
-                txtEmail.Text = customer.Email;
-
-                txtTelephoneNumber.Text = customer.Telephone_Number;
-
-                db.SaveChanges();
-
-                grdCustomer.DataBind();
-            }
-
        
+        protected void grdStaff_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            DoublePaneEntities db = new DoublePaneEntities();
+
+            var staff = db.Staffs.Find(grdStaff.SelectedValue);
+
+            TxtFirstName.Text = staff.First_Name;
+
+            TxtLastName.Text = staff.Last_Name_;
+
+            calStaff.SelectedDate = (DateTime)staff.DOB;
+
+            txtEmail.Text = staff.Email;
+
+            txtTelephoneNumber.Text = staff.Telephone_Number;
+
+            db.SaveChanges();
+
+            grdStaff.DataBind();
+
+        }
     }
 }

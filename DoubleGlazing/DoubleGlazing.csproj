@@ -90,8 +90,10 @@
     <Content Include="frmCustomer.aspx" />
     <Content Include="FrmManufacturer.aspx" />
     <Content Include="frmStaff.aspx" />
+    <Content Include="frmVisit.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ManagementReport.aspx" />
+    <Content Include="frmProduct.aspx" />
     <Content Include="Staff.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -135,6 +137,13 @@
     <Compile Include="frmStaff.aspx.designer.cs">
       <DependentUpon>frmStaff.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmVisit.aspx.cs">
+      <DependentUpon>frmVisit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmVisit.aspx.designer.cs">
+      <DependentUpon>frmVisit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +159,13 @@
     </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>DoubleGlazing.tt</DependentUpon>
+    </Compile>
+    <Compile Include="frmProduct.aspx.cs">
+      <DependentUpon>frmProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmProduct.aspx.designer.cs">
+      <DependentUpon>frmProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>DoubleGlazing.tt</DependentUpon>

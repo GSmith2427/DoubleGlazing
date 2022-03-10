@@ -49,14 +49,16 @@
             <PropertyRef Name="Sales LeadID" />
           </Key>
           <Property Name="Sales LeadID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="ManufacturerID" Type="int" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="StaffID" />
           </Key>
           <Property Name="StaffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="First Name" Type="varchar" MaxLength="50" />
-          <Property Name="Last Name " Type="varchar" MaxLength="50" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
           <Property Name="DOB" Type="smalldatetime" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Telephone_Number" Type="varchar" MaxLength="50" />
@@ -90,6 +92,30 @@
               <PropertyRef Name="ManufacturerID" />
             </Principal>
             <Dependent Role="Product">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales Lead_ToCustomer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sales Lead" Type="Self.Sales Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sales Lead">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales Lead_ToManufacturer">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Sales Lead" Type="Self.Sales Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ManufacturerID" />
+            </Principal>
+            <Dependent Role="Sales Lead">
               <PropertyRef Name="ManufacturerID" />
             </Dependent>
           </ReferentialConstraint>
@@ -134,6 +160,14 @@
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sales Lead_ToCustomer" Association="Self.FK_Sales Lead_ToCustomer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales Lead" EntitySet="Sales Lead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales Lead_ToManufacturer" Association="Self.FK_Sales Lead_ToManufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Sales Lead" EntitySet="Sales Lead" />
+          </AssociationSet>
           <AssociationSet Name="FK_Visit_ToCustomer" Association="Self.FK_Visit_ToCustomer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Visit" EntitySet="Visit" />
@@ -156,6 +190,7 @@
           <Property Name="Address_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telephone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_ToManufacturer" FromRole="Manufacturer" ToRole="Product" />
+          <NavigationProperty Name="Sales_Lead" Relationship="DoublePaneModel.FK_Sales_Lead_ToManufacturer" FromRole="Manufacturer" ToRole="Sales_Lead" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -183,14 +218,18 @@
             <PropertyRef Name="Sales_LeadID" />
           </Key>
           <Property Name="Sales_LeadID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="ManufacturerID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="DoublePaneModel.FK_Sales_Lead_ToCustomer" FromRole="Sales_Lead" ToRole="Customer" />
+          <NavigationProperty Name="Manufacturer" Relationship="DoublePaneModel.FK_Sales_Lead_ToManufacturer" FromRole="Sales_Lead" ToRole="Manufacturer" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="StaffID" />
           </Key>
           <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Last_Name_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Precision="0" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telephone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -267,6 +306,14 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Visit" EntitySet="Visits" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sales_Lead_ToCustomer" Association="DoublePaneModel.FK_Sales_Lead_ToCustomer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sales_Lead" EntitySet="Sales_Leads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Lead_ToManufacturer" Association="DoublePaneModel.FK_Sales_Lead_ToManufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturers" />
+            <End Role="Sales_Lead" EntitySet="Sales_Leads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -280,6 +327,7 @@
           <Property Name="DOB" Type="DateTime" Precision="7" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Visits" Relationship="DoublePaneModel.FK_Visit_ToCustomer" FromRole="Customer" ToRole="Visit" />
+          <NavigationProperty Name="Sales_Lead" Relationship="DoublePaneModel.FK_Sales_Lead_ToCustomer" FromRole="Customer" ToRole="Sales_Lead" />
         </EntityType>
         <Association Name="FK_Visit_ToCustomer">
           <End Type="DoublePaneModel.Customer" Role="Customer" Multiplicity="1" />
@@ -290,6 +338,30 @@
             </Principal>
             <Dependent Role="Visit">
               <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Lead_ToCustomer">
+          <End Type="DoublePaneModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="DoublePaneModel.Sales_Lead" Role="Sales_Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sales_Lead">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Lead_ToManufacturer">
+          <End Type="DoublePaneModel.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
+          <End Type="DoublePaneModel.Sales_Lead" Role="Sales_Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ManufacturerID" />
+            </Principal>
+            <Dependent Role="Sales_Lead">
+              <PropertyRef Name="ManufacturerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -332,6 +404,8 @@
           <EntitySetMapping Name="Sales_Leads">
             <EntityTypeMapping TypeName="DoublePaneModel.Sales_Lead">
               <MappingFragment StoreEntitySet="Sales Lead">
+                <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Sales_LeadID" ColumnName="Sales LeadID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -339,9 +413,9 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="DoublePaneModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Last_Name_" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="First_Name" ColumnName="First Name" />
-                <ScalarProperty Name="Last_Name_" ColumnName="Last Name " />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Telephone_Number" ColumnName="Telephone_Number" />

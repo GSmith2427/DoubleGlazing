@@ -13,5 +13,10 @@ namespace DoubleGlazing
         {
 
         }
+
+        protected void txtManufacturerName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

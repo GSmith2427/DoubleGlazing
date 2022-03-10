@@ -29,9 +29,6 @@
                 <WeekendDayStyle BackColor="#FFFFCC" />
             </asp:Calendar>
             <br />
-            Address&nbsp; <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
-            <br />
-            <br />
             Telephone Number&nbsp; <asp:TextBox ID="txtTelephoneNumber" runat="server"></asp:TextBox>
             <br />
             <br />
@@ -45,31 +42,30 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:GridView ID="grdStaff" runat="server" AutoGenerateColumns="False" DataKeyNames="StaffID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." OnSelectedIndexChanged="grdCustomer_SelectedIndexChanged" CellPadding="4" GridLines="None" ForeColor="#333333">
+            <asp:GridView ID="grdStaff" runat="server" AutoGenerateColumns="False" DataKeyNames="StaffID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." OnSelectedIndexChanged="grdStaff_SelectedIndexChanged1" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
-                    <asp:BoundField DataField="Last_Name_" HeaderText="Last_Name_" SortExpression="Last_Name_" />
                     <asp:BoundField DataField="StaffID" HeaderText="StaffID" SortExpression="StaffID" InsertVisible="False" ReadOnly="True" />
                     <asp:BoundField DataField="First_Name" HeaderText="First_Name" SortExpression="First_Name" />
+                    <asp:BoundField DataField="Last_Name" HeaderText="Last_Name" SortExpression="Last_Name" />
                     <asp:BoundField DataField="DOB" HeaderText="DOB" SortExpression="DOB" />
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     <asp:BoundField DataField="Telephone_Number" HeaderText="Telephone_Number" SortExpression="Telephone_Number" />
                     <asp:BoundField DataField="Role" HeaderText="Role" SortExpression="Role" />
                 </Columns>
-                <EditRowStyle BorderStyle="None" />
-                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#FFCC66" BorderColor="Black" ForeColor="#333333" HorizontalAlign="Center" />
-                <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#FFCC66" BorderColor="Red" Font-Bold="True" ForeColor="Navy" />
-                <SortedAscendingCellStyle BackColor="#FDF5AC" />
-                <SortedAscendingHeaderStyle BackColor="#4D0000" />
-                <SortedDescendingCellStyle BackColor="#FCF6C0" />
-                <SortedDescendingHeaderStyle BackColor="#820000" />
+                <EditRowStyle BorderStyle="None" BackColor="#7C6F57" />
+                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BorderColor="Black" BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#E3EAEB" />
+                <SelectedRowStyle BackColor="Red" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                <SortedAscendingHeaderStyle BackColor="#246B61" />
+                <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Last Name ] AS Last_Name_, [StaffID], [First Name] AS First_Name, [DOB], [Email], [Telephone_Number], [Role] FROM [Staff]">
-            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringStaff %>" SelectCommand="SELECT * FROM [Staff]" DeleteCommand="DELETE FROM Staff" InsertCommand="INSERT INTO Staff(First_Name, Last_Name, DOB, Email, Telephone_Number, Role) VALUES (,,,,,)" UpdateCommand="UPDATE Staff SET Last_Name =, First_Name =, DOB =, Email =, Telephone_Number =, Role ="></asp:SqlDataSource>
         </div>
     </form>
 </body>

@@ -18,6 +18,7 @@ namespace DoubleGlazing
         public Customer()
         {
             this.Visits = new HashSet<Visit>();
+            this.Sales_Lead = new HashSet<Sales_Lead>();
         }
     
         public int CustomerID { get; set; }
@@ -30,5 +31,7 @@ namespace DoubleGlazing
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visit> Visits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sales_Lead> Sales_Lead { get; set; }
     }
 }
