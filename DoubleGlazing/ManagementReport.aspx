@@ -18,8 +18,11 @@
                 </Columns>
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSourceTotalsales" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Order].[Units Sold ], Manufacturer.ManufacturerID, Manufacturer.[Manufacturer Name ], [Order].OrderID FROM [Order] CROSS JOIN Manufacturer"></asp:SqlDataSource>
-            <asp:GridView ID="GridView2" runat="server">
+            <br />
+            sales by product
+            <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource1">
             </asp:GridView>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
             <asp:GridView ID="GridView3" runat="server">
             </asp:GridView>
             <asp:GridView ID="GridView4" runat="server">

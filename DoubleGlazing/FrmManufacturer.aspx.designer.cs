@@ -51,31 +51,31 @@ namespace DoubleGlazing
         protected global::System.Web.UI.WebControls.TextBox txtManufacturerNum;
 
         /// <summary>
-        /// txtAdd control.
+        /// btnNewEntry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button txtAdd;
+        protected global::System.Web.UI.WebControls.Button btnNewEntry;
 
         /// <summary>
-        /// txtUpdate control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button txtUpdate;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
 
         /// <summary>
-        /// txtDelete control.
+        /// btnDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button txtDelete;
+        protected global::System.Web.UI.WebControls.Button btnDelete;
 
         /// <summary>
         /// grdManufacturer control.

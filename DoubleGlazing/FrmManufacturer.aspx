@@ -22,14 +22,14 @@
         <br />
         <br />
         <br />
-        <asp:Button ID="txtAdd" runat="server" Text="Add " />
+        <asp:Button ID="btnNewEntry" runat="server" Text="New Entry " OnClick="txtAdd_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="txtUpdate" runat="server" Text="Update " OnClick="Button2_Click" />
+        <asp:Button ID="btnUpdate" runat="server" Text="Update " OnClick="Button2_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="txtDelete" runat="server" Text="Delete" OnClick="Button3_Click" />
+        <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="Button3_Click" />
         <br />
         <br />
-        <asp:GridView ID="grdManufacturer" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ManufacturerID" DataSourceID="SqlDataSource3" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="grdManufacturer" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ManufacturerID" DataSourceID="SqlDataSource3" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="grdManufacturer_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
